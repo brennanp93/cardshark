@@ -1,0 +1,62 @@
+/* Reset and base styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 2rem;
+  color: #333;
+}
+
+/* Form container styling */
+form {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 400px;
+}
+
+/* Label and select elements */
+label {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Submit button */
+button[type="submit"] {
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: #005fa3;
+}
+
+/* Section div spacing */
+#holeCardDiv,
+#flopDiv,
+#turnDiv,
+#riverDiv {
+  margin-bottom: 1.5rem;
+}
+
+.hidden{
+    display: none;
+}

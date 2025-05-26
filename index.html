@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="script.js"></script>
+    <title>Card Shark</title>
+</head>
+
+<body>
+    <div id="holeCardDiv">
+        <form action="" id="holeCardForm">
+            <label for="deck">What is your hand?</label>
+            <select name="holeCards" class="holeCards" id="hc1">
+            </select>
+            <select name="holeCards" class="holeCards" id="hc2">
+            </select>
+            <button id="btn" type="submit">submit</button>
+        </form>
+    </div>
+    <div id="flopDiv" class="hidden">
+        <form action="" id="flopForm">
+            <label for="deck">What is the flop?</label>
+            <select name="deck" class="communityCard" id="cc1">
+            </select>
+            <select name="deck" class="communityCard" id="cc2">
+            </select>
+            <select name="deck" class="communityCard" id="cc3">
+            </select>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    <div id="turnDiv" class="hidden">
+        <form action="" id="turnForm">
+            <label for="deck">What is the turn?</label>
+            <select name="deck" class="communityCard" id="turn">
+            </select>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    <div id="riverDiv" class="hidden">
+        <form action="" id="riverForm">
+            <label for="deck">What is the river?</label>
+            <select name="deck" class="communityCard" id="river">
+            </select>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
