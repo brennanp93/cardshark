@@ -224,6 +224,7 @@ class InPlayCards {
       inPlayCards.push(card5);
       filterInPlayCards();
       console.log(inPlayCards);
+      serverRequest()
     } else {
       alert("duplicate detected");
       return;
@@ -233,12 +234,6 @@ class InPlayCards {
 }
 const hand = new InPlayCards();
 
-// holeCardDiv.addEventListener("change",(e)=>{
-//   e.preventDefault();
-//   if (!hc1.value === "--"){
-//     document.getElementById("btn").disabled = false;
-//   }
-// })
 holeCardForm.addEventListener("submit", (e) => {
   e.preventDefault();
   if (hc1.value === "--" || hc2.value === "--") {
@@ -278,34 +273,23 @@ function checkDupes(arr) {
 return arr.length !== new Set(arr).size
 }
 
-// document.getElementById("hc1").addEventListener("change", (e) => {
-// hc1.addEventListener("change", (e) => {
-//     e.preventDefault();
-//     // reset second hole card drop down to prepare for updated list of cards
-//     hc2.innerHTML = ""
-//     inPlayCards.push(e.target.value)
-//     // remove the selected card from the first drop down so that it is not included in the second drop down.
-//     if (!inPlayCards.includes(e.target.value)) {
-//         playingDeck = playingDeck.filter((card) => {
-//             card !== e.target.value
-//         });
-//     }
-
-//     // playingDeck = playingDeck.filter((card) => card !== e.target.value);
-//     // iterate through the new deck to populate the drop down without the first selected card.
-//     playingDeck.forEach((card, idx) => {
-//         let option = document.createElement("option");
-//         option.innerText = card;
-//         option.value = card;
-//         hc2.appendChild(option)
-//     })
-//     console.log(inPlayCards)
-// })
-
-// When one hole card drop down is changed, mutate the array so that the
-// second drop down does not include the card selected in the first drop down.
-
-// You want all 3 cards of the flop to be able to be populated.
-// Then the subsequent two cards, you'll want to clone or something.
+async function serverRequest(params) {
+  console.log(hand, { hand });
+  try {
+    const response = await fetch("http://127.0.0.1:3000/request", {
+      // mode: "no-cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(hand),
+    });
+    let data = await response.json();
+    // data = JSON.parse(data);
+    console.log(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 
 init();
