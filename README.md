@@ -21,6 +21,13 @@ npm start
 
 The server prints two URLs: one for this computer and one to open on a phone connected to the same Wi-Fi.
 
+## Deploy (Netlify)
+
+`netlify.toml` publishes `public/` as a static site and runs the coach API as Netlify Functions (`netlify/functions/`), so `server.js` is only for local use.
+
+1. Import the GitHub repo in Netlify. Leave build command and publish directory blank; `netlify.toml` sets them.
+2. Optional, for the coach: **Site configuration → Environment variables** → add `ANTHROPIC_API_KEY`, then redeploy.
+
 ## Develop
 
 ```bash
@@ -35,7 +42,9 @@ npm test      # hand evaluator, odds, and outs tests
 | `public/poker.js` | Hand evaluator, equity simulation, outs, preflop strength, suggestions. Shared by the browser and server. |
 | `public/app.js` | UI: card picker, analysis panel, saves the current hand in localStorage |
 | `public/index.html`, `public/style.css` | Mobile-first page |
-| `server.js` | Express: serves `public/`, plus `GET /api/status` and `POST /api/coach` (Claude) |
+| `server.js` | Local Express server: serves `public/`, plus `GET /api/status` and `POST /api/coach` |
+| `lib/coach.js` | Claude coach logic, shared by `server.js` and the Netlify functions |
+| `netlify/functions/` | `/api/status` and `/api/coach` on Netlify |
 | `test/` | `node --test` tests for `poker.js` |
 
 The suggestions are a learning aid based on win odds alone. They don't account for bet sizes, position, or reads on other players.

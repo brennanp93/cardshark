@@ -1,0 +1,8 @@
+# Netlify serves public/ as a static site; the coach API runs as functions.
+[build]
+  publish = "public"
+  command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
