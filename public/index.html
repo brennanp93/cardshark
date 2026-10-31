@@ -32,6 +32,10 @@
                 <h2>Board <span class="hint">flop · turn · river</span></h2>
                 <div class="slots board" id="boardSlots"></div>
             </div>
+            <div class="actions">
+                <button type="button" id="undo" class="secondary">Undo</button>
+                <button type="button" id="newHand">New hand</button>
+            </div>
         </section>
 
         <section class="analysis" id="analysis" aria-live="polite"></section>
@@ -68,10 +72,6 @@
         </details>
     </main>
 
-    <footer class="actions">
-        <button type="button" id="undo" class="secondary">Undo</button>
-        <button type="button" id="newHand">New hand</button>
-    </footer>
 
     <dialog id="picker" class="picker">
         <div class="picker-head">

@@ -94,7 +94,7 @@ button:disabled {
 main {
   max-width: 520px;
   margin: 0 auto;
-  padding: 0 16px calc(96px + env(safe-area-inset-bottom));
+  padding: 0 16px calc(72px + env(safe-area-inset-bottom));
 }
 
 /* ---------- table & slots ---------- */
@@ -396,19 +396,12 @@ main {
   color: var(--muted);
 }
 
-/* ---------- bottom actions ---------- */
+/* ---------- hand actions ---------- */
 
+/* Inline under the board, not fixed to the bottom, so host badges can't cover it. */
 .actions {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
   gap: 10px;
-  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-  background: linear-gradient(to top, var(--felt-dark) 70%, transparent);
-  max-width: 520px;
-  margin: 0 auto;
 }
 
 .actions button {
