@@ -1,35 +1,41 @@
 # Card Shark
 
-## High-Level Overview
+A phone-friendly Texas Hold'em helper for learning poker during home games. Enter your two cards and the board as they come; at every street Card Shark shows:
 
-1. User inputs how many players (or hands) are being dealt at the poker table.  
-2. User inputs the two hole cards they are currently holding.  
-3. User inputs the flop (the first three community cards).  
-4. User hits *Submit* or *Go*, which sends the hole cards and the flop to the AI for analysis. The AI will advise on the optimal next action (raise, check, call, fold, etc.).  
-5. Response is returned.  
-6. User follows the recommendation.  
-7. If continuing, the user enters the turn card (the fourth community card).  
-8. Step 4 is repeated.  
-9. If continuing, the user enters the river card (the fifth and final community card).  
-10. Step 5 is repeated.  
-11. End of hand.
+- **Your hand**: the best five cards, highlighted (e.g. "Two Pair, Kings and Sevens")
+- **Win / tie odds** against the number of players at the table (simulated, 20,000 deals)
+- **Outs**: which cards improve you, and your chance to hit by the river, with the rule of 2 and 4
+- **Starting-hand strength** before the flop (Premium / Strong / Playable / Marginal / Weak)
+- **A suggested action** (raise, bet/call, check/call small, fold) with the reason in plain English
+- **Ask the coach** (optional): Claude explains the spot and teaches a concept
 
-## Overview
+The poker math runs in the browser, so everything except the coach works without an API key.
 
-- **Hand Input:**  
-  Allow the user to input their hand (the two hole cards they are holding).  
-  - This will likely be implemented as dropdown menus with pre-populated card values.  
-  - The second dropdown should dynamically exclude the card selected in the first dropdown.  
-    - For example: if the first card selected is *Ace of Hearts*, that card should not appear as an option in the second dropdown.  
+## Run it
 
-- **The Flop:**  
-  Similar to the hand input, provide dropdowns to select each of the three flop cards (the first community cards).  
-  - Each subsequent dropdown should exclude the cards already selected.  
+```bash
+npm install
+cp .env.example .env    # optional: add ANTHROPIC_API_KEY to turn on the coach
+npm start
+```
 
-- **AI Request:**  
-  The selected card data is sent, along with a prompt, to the language model (LLM).  
-  - The prompt should guide the model to provide basic recommendations such as "raise", "check", "call", or "fold".  
-  - The response format could be a simple object, e.g., `{ response: "raise" }` or `{ response: "check" }`.  
+The server prints two URLs: one for this computer and one to open on a phone connected to the same Wi-Fi.
 
-- **Data Handling:**  
-  The selected cards (especially community cards) may need to be stored in local storage to persist between stages of the hand (e.g., from flop to turn to river).  
+## Develop
+
+```bash
+npm run dev   # restarts on file changes
+npm test      # hand evaluator, odds, and outs tests
+```
+
+## Layout
+
+| Path | What it is |
+| --- | --- |
+| `public/poker.js` | Hand evaluator, equity simulation, outs, preflop strength, suggestions. Shared by the browser and server. |
+| `public/app.js` | UI: card picker, analysis panel, saves the current hand in localStorage |
+| `public/index.html`, `public/style.css` | Mobile-first page |
+| `server.js` | Express: serves `public/`, plus `GET /api/status` and `POST /api/coach` (Claude) |
+| `test/` | `node --test` tests for `poker.js` |
+
+The suggestions are a learning aid based on win odds alone. They don't account for bet sizes, position, or reads on other players.

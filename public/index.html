@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f3d2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♠</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="app.js"></script>
+    <title>Card Shark</title>
+</head>
+
+<body>
+    <header class="topbar">
+        <h1>Card Shark</h1>
+        <div class="players" aria-label="Players at the table">
+            <button type="button" id="playersDown" aria-label="Fewer players">−</button>
+            <span><strong id="playersCount">6</strong> players</span>
+            <button type="button" id="playersUp" aria-label="More players">+</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="table">
+            <div class="row">
+                <h2>Your hand</h2>
+                <div class="slots" id="holeSlots"></div>
+            </div>
+            <div class="row">
+                <h2>Board <span class="hint">flop · turn · river</span></h2>
+                <div class="slots board" id="boardSlots"></div>
+            </div>
+        </section>
+
+        <section class="analysis" id="analysis" aria-live="polite"></section>
+
+        <details class="reference">
+            <summary>Hand rankings</summary>
+            <ol class="rankings">
+                <li><strong>Royal Flush</strong> <span>A K Q J 10, same suit</span></li>
+                <li><strong>Straight Flush</strong> <span>Five in a row, same suit</span></li>
+                <li><strong>Four of a Kind</strong> <span>Four cards of one rank</span></li>
+                <li><strong>Full House</strong> <span>Three of a kind + a pair</span></li>
+                <li><strong>Flush</strong> <span>Any five of one suit</span></li>
+                <li><strong>Straight</strong> <span>Five in a row, any suits (A can be low)</span></li>
+                <li><strong>Three of a Kind</strong> <span>Three cards of one rank</span></li>
+                <li><strong>Two Pair</strong> <span>Two different pairs</span></li>
+                <li><strong>Pair</strong> <span>Two cards of one rank</span></li>
+                <li><strong>High Card</strong> <span>None of the above</span></li>
+            </ol>
+            <p class="small">Your best five cards out of your two plus the five on the board play. Ties are broken by the next-highest cards (the <em>kicker</em>).</p>
+        </details>
+
+        <details class="reference">
+            <summary>Quick lessons</summary>
+            <dl class="lessons">
+                <dt>Outs</dt>
+                <dd>Cards left in the deck that improve your hand. A flush draw has 9.</dd>
+                <dt>Rule of 2 and 4</dt>
+                <dd>On the flop, outs × 4 ≈ your % chance to hit by the river. On the turn, outs × 2.</dd>
+                <dt>Pot odds</dt>
+                <dd>If calling $10 to win a $30 pot, you pay 10 / (30 + 10) = 25% of the final pot, so you need to win more than 25% of the time.</dd>
+                <dt>Position</dt>
+                <dd>Acting last is an advantage: you see what everyone else does first. Play more hands late, fewer early.</dd>
+            </dl>
+        </details>
+    </main>
+
+    <footer class="actions">
+        <button type="button" id="undo" class="secondary">Undo</button>
+        <button type="button" id="newHand">New hand</button>
+    </footer>
+
+    <dialog id="picker" class="picker">
+        <div class="picker-head">
+            <h3 id="pickerTitle">Pick a card</h3>
+            <button type="button" id="pickerClose" class="icon" aria-label="Close">✕</button>
+        </div>
+        <div class="grid" id="pickerGrid"></div>
+    </dialog>
+</body>
+
+</html>
